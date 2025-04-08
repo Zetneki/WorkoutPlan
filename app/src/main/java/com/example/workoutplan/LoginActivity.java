@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString();
 
         Log.i(LOG_TAG,email + " " + password);
-        startWorkingOut();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -74,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         //intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+        finish();
     }
 
     public void navigateToRegistration(View view) {
