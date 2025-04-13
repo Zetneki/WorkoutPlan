@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomSeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:tickMark">@drawable/seekbar_tick</item>
+        <item name="tickMarkTintMode">src_in</item>
+        <item name="tickMarkTint">@color/primary</item>
+    </style>
+</resources>

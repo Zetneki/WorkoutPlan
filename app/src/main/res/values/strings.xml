@@ -11,4 +11,19 @@
     <string name="username">Username</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
+    <string name="delete_plan">Delete plan</string>
+    <string name="add_new_workout_plan">Add new workout plan</string>
+    <string name="my_workout_plans">My Workout Plans</string>
+    <string name="completed">Completed</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="add_day">Add day</string>
+    <string name="day_name">Day name</string>
+    <string name="plan_name">Plan name</string>
+    <string name="exercise_name">Exercise name</string>
+    <string name="reps_e_g_3x10">Reps (e.g. 3x10)</string>
+    <string name="delete_exercise">Delete exercise</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="progress">Progress in days:</string>
+    <string name="update_plan">Update Plan</string>
 </resources>

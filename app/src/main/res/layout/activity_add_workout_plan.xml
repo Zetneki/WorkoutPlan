@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/primary_dark"
+    tools:context=".AddWorkoutPlan">
+
+    <!-- Plan name (full width) -->
+    <EditText
+        android:id="@+id/et_plan_name"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="@string/plan_name"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:inputType="textCapWords"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:background="@drawable/rounded_edittext"/>
+
+    <!-- Day name (80% width, centered) -->
+    <EditText
+        android:id="@+id/et_day_name"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="@string/day_name"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:inputType="textCapWords"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_plan_name"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext"
+        />
+
+    <!-- RecyclerView -->
+
+    <!-- Add Day button -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/days_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_day_name"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <Button
+        android:id="@+id/btn_add_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_day"
+        android:backgroundTint="@color/primary_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintBottom_toTopOf="@id/btn_save_plan" />
+
+    <!-- Save button -->
+    <Button
+        android:id="@+id/btn_save_plan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
