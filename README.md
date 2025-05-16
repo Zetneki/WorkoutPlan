@@ -1,0 +1,1 @@
+# Edzés követő alkalmazás
