@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/primary_dark"
-    tools:context=".AddWorkoutPlan">
+    tools:context=".AddWorkoutPlanActivity">
 
     <!-- Plan name (full width) -->
     <EditText
@@ -87,4 +87,15 @@
         app:layout_constraintWidth_percent="0.6"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="16dp"/>
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

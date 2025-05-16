@@ -20,6 +20,32 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_edit_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/edit_day"
+            android:backgroundTint="@color/primary_light"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btn_delete_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete_day"
+            android:backgroundTint="@color/primary"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
     <!-- ÚJ GOMB: Gyakorlat hozzáadása -->
     <Button
         android:id="@+id/btn_add_exercise"

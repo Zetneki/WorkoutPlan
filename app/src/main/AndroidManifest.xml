@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,9 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkoutPlan"
         tools:targetApi="31">
+
         <activity
-            android:name=".AddWorkoutPlan"
-            android:configChanges="keyboard|keyboardHidden|screenSize|screenLayout|orientation"
+            android:name=".AddWorkoutPlanActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
@@ -33,6 +39,30 @@
             android:name=".MainActivity"
             android:exported="false">
         </activity>
+
+        <receiver
+            android:name=".ReminderReceiver"
+            android:exported="false"
+            android:enabled="true">
+        </receiver>
+        <receiver
+            android:name=".WeeklyResetReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.workoutplan.ACTION_WEEKLY_RESET" />
+
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" /> <!-- HUAWEI eszközökhöz -->
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

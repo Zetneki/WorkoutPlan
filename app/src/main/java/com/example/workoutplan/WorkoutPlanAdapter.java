@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -53,17 +52,21 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
         holder.planName.setText(currentPlan.getName());
 
         int totalDays = currentPlan.getDays().size();
-        int completedDays = (int) currentPlan.getDays().stream().filter(WorkoutDay::isCompleted).count();
+        int currentProgress = currentPlan.getCurrentProgress();
 
         holder.progressSeekBar.setMax(Math.max(totalDays, 1));
-        holder.progressSeekBar.setProgress(completedDays);
+        holder.progressSeekBar.setProgress(currentProgress);
 
         holder.bindPlanId(currentPlan.getPlanId());
 
         StringBuilder allDaysExercises = new StringBuilder();
-        for (WorkoutDay day : currentPlan.getDays()) {
-            if (day.isCompleted()) {
-                completedDays++;
+        for (int i = 0; i < currentPlan.getDays().size(); i++) {
+            WorkoutDay day = currentPlan.getDays().get(i);
+
+            // Jelöld a kész napokat (aktuális progress alapján)
+            boolean isDayCompleted = (i < currentProgress);
+            if (isDayCompleted) {
+                allDaysExercises.append("✓ "); // Jelölés kész napoknál
             }
 
             allDaysExercises.append(day.getDayName()).append(":\n");
@@ -75,19 +78,13 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
                         .append(ex.getSetsReps())
                         .append(")\n");
             }
-
             allDaysExercises.append("\n");
         }
 
-        boolean isCompleted = totalDays > 0 && completedDays == totalDays;
+        boolean isCompleted = (totalDays > 0 && currentProgress == totalDays);
         holder.progressSeekBar.setActivated(isCompleted);
 
         holder.daysAndExercises.setText(allDaysExercises.toString());
-
-        /*
-        if (!currentPlan.getDays().isEmpty()) {
-            holder.completedCheckbox.setChecked(currentPlan.getDays().get(0).getDoneForTheDay());
-        }*/
 
     }
 
@@ -98,8 +95,23 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateData(ArrayList<WorkoutPlan> newPlans) {
-        this.plans = newPlans; // Frissíti a referenciát
+        this.plans.clear();
+        this.plans.addAll(newPlans);
         notifyDataSetChanged();
+
+        if (emptyStateListener != null) {
+            emptyStateListener.onDataChanged(getItemCount() == 0);
+        }
+    }
+
+    public interface OnEmptyStateListener {
+        void onDataChanged(boolean isEmpty);
+    }
+
+    private OnEmptyStateListener emptyStateListener;
+
+    public void setOnEmptyStateListener(OnEmptyStateListener listener) {
+        this.emptyStateListener = listener;
     }
 
     static class PlanViewHolder extends RecyclerView.ViewHolder {
@@ -151,7 +163,7 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
                 public void onClick(View v) {
                     Log.d("Activity", "Edit plan button clicked!");
                     // Új intent létrehozása az AddWorkoutPlan Activity-hez
-                    Intent intent = new Intent(itemView.getContext(), AddWorkoutPlan.class);
+                    Intent intent = new Intent(itemView.getContext(), AddWorkoutPlanActivity.class);
                     // Átadjuk a planId-t szerkesztéshez
                     intent.putExtra("PLAN_ID", currentPlanId);
                     intent.putExtra("EDIT_MODE", true);

@@ -4,12 +4,13 @@ import java.util.List;
 
 public class WorkoutDay {
     private String dayName;
-    private ArrayList<Exercise> exercises = new ArrayList<>();
-    private Boolean completed;
+    private ArrayList<Exercise> exercises = new ArrayList<>();;
+
+    public WorkoutDay() {}
 
     public WorkoutDay(String dayName) {
         this.dayName = dayName;
-        this.completed = false;
+        this.exercises = new ArrayList<>();
     }
 
     // Getters and setters
@@ -23,18 +24,11 @@ public class WorkoutDay {
     }
 
     public ArrayList<Exercise> getExercises() {
-        return exercises;
+        return exercises != null ? exercises : new ArrayList<>();
     }
 
     public void setExercises(ArrayList<Exercise> exercises) {
-        this.exercises = exercises;
+        this.exercises = exercises != null ? exercises : new ArrayList<>();
     }
 
-    public Boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
 }

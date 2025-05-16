@@ -71,14 +71,6 @@
         android:orientation="horizontal"
         android:weightSum="5">
 
-        <!--
-        <CheckBox
-            android:id="@+id/completed_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/completed"
-            android:textColor="#757575"/>-->
-
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="0dp"

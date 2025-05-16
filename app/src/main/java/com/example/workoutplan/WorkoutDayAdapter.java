@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,17 @@ public class WorkoutDayAdapter extends RecyclerView.Adapter<WorkoutDayAdapter.Da
     public WorkoutDayAdapter(ArrayList<WorkoutDay> days, Context context) {
         this.days = days;
         this.context = context;
+    }
+
+    public interface OnDayActionListener {
+        void onDayDelete(int position);
+        void onDayEdit(int position, WorkoutDay day);
+    }
+
+    private OnDayActionListener dayActionListener;
+
+    public void setOnDayActionListener(OnDayActionListener listener) {
+        this.dayActionListener = listener;
     }
 
     @NonNull
@@ -53,6 +65,8 @@ public class WorkoutDayAdapter extends RecyclerView.Adapter<WorkoutDayAdapter.Da
         private RecyclerView exercisesRecyclerView;
         private ExerciseAdapter exerciseAdapter;
         private Button btnAddExercise;
+        private Button btnDeleteDay;
+        private Button btnEditDay;
         public DayViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDayName = itemView.findViewById(R.id.tv_day_name);
@@ -62,8 +76,23 @@ public class WorkoutDayAdapter extends RecyclerView.Adapter<WorkoutDayAdapter.Da
             exercisesRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
             exercisesRecyclerView.setAdapter(exerciseAdapter);
             btnAddExercise = itemView.findViewById(R.id.btn_add_exercise);
+            btnEditDay = itemView.findViewById(R.id.btn_edit_day);
+            btnDeleteDay = itemView.findViewById(R.id.btn_delete_day);
             btnAddExercise.setOnClickListener(v -> {
                 showAddExerciseDialog();
+            });
+            btnDeleteDay.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && dayActionListener != null) {
+                    dayActionListener.onDayDelete(position);
+                }
+            });
+
+            btnEditDay.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && dayActionListener != null) {
+                    dayActionListener.onDayEdit(position, days.get(position));
+                }
             });
         }
 

@@ -25,7 +25,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     }
 
     public ExerciseAdapter(ArrayList<Exercise> exercises) {
-        this.exercises = exercises;
+        this.exercises = exercises != null ? exercises : new ArrayList<>();
     }
 
     public void setOnExerciseClickListener(OnExerciseClickListener listener) {
@@ -52,7 +52,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     }
 
     public void updateExercises(ArrayList<Exercise> newExercises) {
-        this.exercises = newExercises;
+        this.exercises = newExercises != null ? newExercises : new ArrayList<>();
         notifyDataSetChanged();
     }
 

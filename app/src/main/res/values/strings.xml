@@ -26,4 +26,8 @@
     <string name="add_exercise">Add exercise</string>
     <string name="progress">Progress in days:</string>
     <string name="update_plan">Update Plan</string>
+    <string name="edit_day_name">Day name</string>
+    <string name="delete_day">Delete day</string>
+    <string name="edit_day">Edit day</string>
+    <string name="no_plans_created">No plans created</string>
 </resources>

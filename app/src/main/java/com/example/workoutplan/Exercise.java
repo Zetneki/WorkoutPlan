@@ -3,12 +3,12 @@ package com.example.workoutplan;
 public class Exercise {
     private String name;
     private String setsReps; // e.g. "4x12"
-    private boolean completed;
+
+    public Exercise() {}
 
     public Exercise(String name, String setsReps) {
         this.name = name;
         this.setsReps = setsReps;
-        this.completed = false;
     }
 
     // Getters and setters
@@ -28,13 +28,5 @@ public class Exercise {
 
     public void setSetsReps(String setsReps) {
         this.setsReps = setsReps;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
     }
 }
