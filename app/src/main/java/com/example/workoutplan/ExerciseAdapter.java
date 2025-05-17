@@ -14,7 +14,6 @@ import com.example.workoutplan.R;
 
 import java.util.ArrayList;
 
-// ExerciseAdapter.java
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
     private ArrayList<Exercise> exercises;
     private OnExerciseClickListener listener;

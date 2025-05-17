@@ -63,10 +63,9 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
         for (int i = 0; i < currentPlan.getDays().size(); i++) {
             WorkoutDay day = currentPlan.getDays().get(i);
 
-            // Jelöld a kész napokat (aktuális progress alapján)
             boolean isDayCompleted = (i < currentProgress);
             if (isDayCompleted) {
-                allDaysExercises.append("✓ "); // Jelölés kész napoknál
+                allDaysExercises.append("✓ ");
             }
 
             allDaysExercises.append(day.getDayName()).append(":\n");
@@ -135,10 +134,8 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
                     if (fromUser && progressChangeListener != null) {
                         boolean isAtMax = (progress == seekBar.getMax());
 
-                        // Küldjük el a progress változást
                         progressChangeListener.onProgressChanged(currentPlanId, progress);
 
-                        // Ha elértük a maximumot és korábban nem voltunk ott
                         if (isAtMax && !wasAtMax) {
                             progressChangeListener.onWorkoutCompleted(currentPlanId);
                             triggerCompletionAnimation(seekBar);
@@ -162,9 +159,9 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
                 @Override
                 public void onClick(View v) {
                     Log.d("Activity", "Edit plan button clicked!");
-                    // Új intent létrehozása az AddWorkoutPlan Activity-hez
+
                     Intent intent = new Intent(itemView.getContext(), AddWorkoutPlanActivity.class);
-                    // Átadjuk a planId-t szerkesztéshez
+
                     intent.putExtra("PLAN_ID", currentPlanId);
                     intent.putExtra("EDIT_MODE", true);
                     itemView.getContext().startActivity(intent);

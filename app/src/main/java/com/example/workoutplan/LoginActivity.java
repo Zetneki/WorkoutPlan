@@ -73,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void startWorkingOut() {
         Intent intent = new Intent(this, MainActivity.class);
-        //intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
         finish();
@@ -81,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void navigateToRegistration(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
-        //intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
     }
 }

@@ -14,15 +14,13 @@ public class AlarmScheduler {
     private static final String TAG = "AlarmScheduler";
 
     public static void scheduleAllAlarms(Context context) {
-        // 1. Töröljük a meglévő alarmokat
+
         cancelReminder(context);
         cancelWeeklyReset(context);
 
-        // 2. Beállítjuk az újakat
         scheduleDailyReminder(context);
         scheduleWeeklyReset(context);
 
-        // 3. Logoljuk az állapotot
         logAlarmStatus(context);
     }
 
@@ -56,7 +54,6 @@ public class AlarmScheduler {
     public static void scheduleDailyReminder(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        // Check permission on Android S and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (!alarmManager.canScheduleExactAlarms()) {
                 Log.w(TAG, "Cannot schedule exact alarms - missing permission");
@@ -64,7 +61,6 @@ public class AlarmScheduler {
             }
         }
 
-        // Cancel any existing alarms to prevent duplicates
         cancelReminder(context);
 
         Intent intent = new Intent(context, ReminderReceiver.class);
@@ -74,21 +70,18 @@ public class AlarmScheduler {
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        // Set alarm for 18:00 daily
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 14);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 
-        // If it's already past 18:00, schedule for tomorrow
         if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
             calendar.add(Calendar.DAY_OF_YEAR, 1);
         }
 
         Log.d(TAG, "Scheduling daily reminder for: " + calendar.getTime());
 
-        // Use best method based on API level
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,
@@ -102,13 +95,9 @@ public class AlarmScheduler {
         }
     }
 
-    /**
-     * Schedule weekly reset at specified day and time
-     */
     public static void scheduleWeeklyReset(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        // Check permission on Android S and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (!alarmManager.canScheduleExactAlarms()) {
                 Log.w(TAG, "Cannot schedule exact alarms - missing permission");
@@ -116,7 +105,6 @@ public class AlarmScheduler {
             }
         }
 
-        // Cancel any existing reset alarms to prevent duplicates
         cancelWeeklyReset(context);
 
         Intent intent = new Intent(context, WeeklyResetReceiver.class);
@@ -128,7 +116,6 @@ public class AlarmScheduler {
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        // Set alarm for Thursday at 20:00
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         calendar.set(Calendar.HOUR_OF_DAY, 3);
@@ -136,7 +123,6 @@ public class AlarmScheduler {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
-        // If we've already passed this time this week, move to next week
         if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
             calendar.add(Calendar.WEEK_OF_YEAR, 1);
         }
@@ -156,9 +142,6 @@ public class AlarmScheduler {
         }
     }
 
-    /**
-     * Cancel daily reminder alarm
-     */
     public static void cancelReminder(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, ReminderReceiver.class);
@@ -171,9 +154,6 @@ public class AlarmScheduler {
         alarmManager.cancel(pendingIntent);
     }
 
-    /**
-     * Cancel weekly reset alarm
-     */
     public static void cancelWeeklyReset(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, WeeklyResetReceiver.class);

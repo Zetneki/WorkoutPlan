@@ -20,17 +20,14 @@ public class ReminderReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "Reminder receiver triggered");
 
-        // Check if we should actually show the notification
         /*
         if (!shouldShowNotification(context)) {
             Log.d(TAG, "Skipping notification - already shown today");
             return;
         }*/
 
-        // Mark that we've shown notification today
         markNotificationShown(context);
 
-        // Show notification
         NotificationHelper.showWorkoutReminder(context);
     }
 
@@ -38,7 +35,6 @@ public class ReminderReceiver extends BroadcastReceiver {
         SharedPreferences prefs = context.getSharedPreferences("WorkoutPrefs", Context.MODE_PRIVATE);
         long lastNotificationTime = prefs.getLong("lastNotificationTime", 0);
 
-        // Check if notification was already shown today
         Calendar lastNotif = Calendar.getInstance();
         lastNotif.setTimeInMillis(lastNotificationTime);
 

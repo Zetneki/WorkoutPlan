@@ -13,8 +13,6 @@ public class WorkoutDay {
         this.exercises = new ArrayList<>();
     }
 
-    // Getters and setters
-
     public String getDayName() {
         return dayName;
     }

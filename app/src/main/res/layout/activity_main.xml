@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
         <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -34,7 +33,6 @@
                 android:textStyle="bold"/>
         </LinearLayout>
 
-        <!-- Empty state view -->
         <TextView
             android:id="@+id/empty_state_text"
             android:layout_width="match_parent"
@@ -46,7 +44,6 @@
             android:textStyle="bold"
             android:visibility="gone"/>
 
-        <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -57,7 +54,6 @@
             android:paddingTop="8dp"/>
     </LinearLayout>
 
-    <!-- FAB -->
     <ImageButton
         android:id="@+id/fab_add_plan"
         android:layout_width="56dp"

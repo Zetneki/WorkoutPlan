@@ -46,7 +46,6 @@
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 
-    <!-- ÚJ GOMB: Gyakorlat hozzáadása -->
     <Button
         android:id="@+id/btn_add_exercise"
         android:layout_width="match_parent"

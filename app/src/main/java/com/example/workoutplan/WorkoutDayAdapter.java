@@ -143,10 +143,8 @@ public class WorkoutDayAdapter extends RecyclerView.Adapter<WorkoutDayAdapter.Da
                     .create();
 
             dialog.setOnShowListener(d -> {
-                // Dialógus ablak háttérszíne
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.light_gray)));
 
-                // Dialógus tartalom háttérszíne
                 dialogView.setBackgroundColor(ContextCompat.getColor(context, R.color.light_gray));
 
                 etName.postDelayed(() -> {
@@ -178,10 +176,8 @@ public class WorkoutDayAdapter extends RecyclerView.Adapter<WorkoutDayAdapter.Da
                     .create();
 
             dialog.setOnShowListener(d -> {
-                // Dialógus ablak háttérszíne
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.light_gray)));
-
-                // Dialógus tartalom háttérszíne
+                
                 dialogView.setBackgroundColor(ContextCompat.getColor(context, R.color.light_gray));
 
                 etName.postDelayed(() -> {

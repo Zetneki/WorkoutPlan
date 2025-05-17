@@ -2,7 +2,7 @@ package com.example.workoutplan;
 
 public class Exercise {
     private String name;
-    private String setsReps; // e.g. "4x12"
+    private String setsReps;
 
     public Exercise() {}
 
@@ -10,9 +10,6 @@ public class Exercise {
         this.name = name;
         this.setsReps = setsReps;
     }
-
-    // Getters and setters
-
 
     public String getName() {
         return name;

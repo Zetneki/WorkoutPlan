@@ -3,34 +3,28 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Saját színpaletta -->
     <color name="deep_purple">#210F37</color>
     <color name="dark_magenta">#4F1C51</color>
     <color name="warm_red">#A55B4B</color>
     <color name="light_sand">#DCA06D</color>
 
-    <!-- Átdolgozott Material Design színséma -->
     <color name="primary">@color/deep_purple</color>
     <color name="primary_dark">@color/dark_magenta</color>
-    <color name="primary_light">#6D3F7A</color> <!-- Köztes árnyalat -->
+    <color name="primary_light">#6D3F7A</color>
     <color name="secondary">@color/warm_red</color>
     <color name="secondary_light">@color/light_sand</color>
 
-    <!-- Háttér és felület színek -->
     <color name="surface">@color/white</color>
-    <color name="background">#F8F5F2</color> <!-- Világos bézs alapú háttér -->
+    <color name="background">#F8F5F2</color>
 
-    <!-- Szöveg színek -->
     <color name="on_primary">@color/white</color>
     <color name="on_secondary">@color/white</color>
     <color name="on_surface">@color/black</color>
-    <color name="on_background">#333333</color> <!-- Sötétebb szürke jobb olvashatóságért -->
+    <color name="on_background">#333333</color>
 
-    <!-- Hibaszínek -->
     <color name="error">#B00020</color>
     <color name="on_error">@color/white</color>
 
-    <!-- Kiegészítő színek -->
     <color name="gray">#9E9E9E</color>
     <color name="light_gray">#D9D7D4</color>
 </resources>

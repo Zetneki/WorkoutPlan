@@ -10,7 +10,6 @@
     android:background="@color/primary_dark"
     tools:context=".AddWorkoutPlanActivity">
 
-    <!-- Input fields horizontal container -->
     <LinearLayout
         android:id="@+id/inputs_container"
         android:layout_width="0dp"
@@ -22,7 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Plan name (left side) -->
         <EditText
             android:id="@+id/et_plan_name"
             android:layout_width="0dp"
@@ -37,7 +35,6 @@
             android:textColor="@color/white"
             android:background="@drawable/rounded_edittext"/>
 
-        <!-- Day name (right side) -->
         <EditText
             android:id="@+id/et_day_name"
             android:layout_width="0dp"
@@ -53,7 +50,6 @@
             android:background="@drawable/rounded_edittext"/>
     </LinearLayout>
 
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/days_recycler"
         android:layout_width="0dp"
@@ -67,7 +63,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent="0.9" />
 
-    <!-- Horizontal button container -->
     <LinearLayout
         android:id="@+id/buttons_container"
         android:layout_width="0dp"
@@ -80,7 +75,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Add Day button -->
         <Button
             android:id="@+id/btn_add_day"
             android:layout_width="0dp"
@@ -90,7 +84,6 @@
             android:text="@string/add_day"
             android:backgroundTint="@color/primary_light" />
 
-        <!-- Save button -->
         <Button
             android:id="@+id/btn_save_plan"
             android:layout_width="0dp"

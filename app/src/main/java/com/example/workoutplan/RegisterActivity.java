@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String LOG_TAG = LoginActivity.class.getName();
-    private static final int SECRET_KEY = 99;
 
     TextView userNameInput;
     TextView emailInput;
@@ -43,9 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
-        //int secret_key = getIntent().getIntExtra("SECRET_KEY", 0);
-        //if (secret_key != SECRET_KEY) finish();
-
         userNameInput = findViewById(R.id.userNameEditText);
         emailInput = findViewById(R.id.emailEditText);
         passwordInput= findViewById(R.id.passwordEditText);
@@ -62,7 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (!password.equals(passwordConfirm)) {
             Log.e(LOG_TAG, "Passwords don't match");
-            //TODO: ki kene iratni h nem egyeznek meg a jelszavak
             return;
         }
 
@@ -84,7 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void startWorkingOut() {
         Intent intent = new Intent(this, MainActivity.class);
-        //intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
         finish();

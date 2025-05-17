@@ -10,7 +10,6 @@
     android:background="@color/primary_dark"
     tools:context=".AddWorkoutPlanActivity">
 
-    <!-- Plan name (full width) -->
     <EditText
         android:id="@+id/et_plan_name"
         android:layout_width="0dp"
@@ -28,7 +27,6 @@
         app:layout_constraintTop_toBottomOf="parent"
         android:background="@drawable/rounded_edittext"/>
 
-    <!-- Day name (80% width, centered) -->
     <EditText
         android:id="@+id/et_day_name"
         android:layout_width="0dp"
@@ -46,10 +44,6 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext"
         />
-
-    <!-- RecyclerView -->
-
-    <!-- Add Day button -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/days_recycler"
@@ -75,7 +69,6 @@
         app:layout_constraintWidth_percent="0.6"
         app:layout_constraintBottom_toTopOf="@id/btn_save_plan" />
 
-    <!-- Save button -->
     <Button
         android:id="@+id/btn_save_plan"
         android:layout_width="0dp"

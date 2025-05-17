@@ -41,21 +41,18 @@ public class ResetProgressWorker extends Worker {
 
             WorkoutRepository repo = new WorkoutRepository(userId);
 
-            // Létrehozunk egy CountDownLatch-et, amivel várni fogunk az aszinkron műveletekre
             final CountDownLatch latch = new CountDownLatch(1);
             final Result[] workResult = {Result.failure()};
 
-            // 1. Tervlista betöltése
             repo.loadWorkoutPlans(new WorkoutRepository.OnPlansLoadedListener() {
                 @Override
                 public void onPlansLoaded(List<WorkoutPlan> plans) {
                     try {
-                        // 2. Minden terv feldolgozása
+
                         for (WorkoutPlan plan : plans) {
                             if (plan.getDays().size() == plan.getCurrentProgress()) {
                                 plan.setCurrentProgress(0);
 
-                                // 3. Terv frissítése - itt nem várunk a befejezésre
                                 repo.updatePlan(plan);
                             }
                         }
@@ -63,7 +60,7 @@ public class ResetProgressWorker extends Worker {
                     } catch (Exception e) {
                         workResult[0] = Result.failure();
                     } finally {
-                        latch.countDown(); // Jelzés, hogy végeztünk
+                        latch.countDown();
                     }
                 }
 
@@ -74,7 +71,6 @@ public class ResetProgressWorker extends Worker {
                 }
             });
 
-            // Maximum 30 másodpercet várunk a művelet befejezésére
             latch.await(30, TimeUnit.SECONDS);
             return workResult[0];
 

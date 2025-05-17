@@ -52,23 +52,19 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         repository = WorkoutRepository.getInstance(userId);
 
-        // Views inicializálása
         etPlanName = findViewById(R.id.et_plan_name);
         etDayName = findViewById(R.id.et_day_name);
         daysRecyclerView = findViewById(R.id.days_recycler);
 
-        // Add loading progress bar - make sure to add this in your layout file
         loadingProgressBar = findViewById(R.id.loading_progress_bar);
         if (loadingProgressBar == null) {
             Log.e(TAG, "Progress bar not found in layout - please add it");
         }
 
-        // Adapter beállítása
         adapter = new WorkoutDayAdapter(days, this);
         daysRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         daysRecyclerView.setAdapter(adapter);
 
-        // Nap törlés/szerkesztés kezelése
         adapter.setOnDayActionListener(new WorkoutDayAdapter.OnDayActionListener() {
             @Override
             public void onDayDelete(int position) {
@@ -83,9 +79,6 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
             }
         });
 
-
-
-        // Gombok kezelése
         findViewById(R.id.btn_add_day).setOnClickListener(v -> addNewDay());
         findViewById(R.id.btn_save_plan).setOnClickListener(v -> savePlan());
 
@@ -97,32 +90,27 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
     }
 
     private void loadPlanForEditing() {
-        // Show loading indicator
+
         if (loadingProgressBar != null) {
             loadingProgressBar.setVisibility(View.VISIBLE);
         }
 
         Log.d(TAG, "Loading plan with ID: " + planIdToEdit);
 
-        // Use the asynchronous method to load the plan from Firestore
         repository.getPlanByIdAsync(planIdToEdit, new WorkoutRepository.OnPlanLoadedListener() {
             @Override
             public void onPlanLoaded(WorkoutPlan planToEdit) {
                 Log.d(TAG, "Plan loaded successfully: " + planToEdit.getName());
 
-                // Terv nevének beállítása
                 etPlanName.setText(planToEdit.getName());
 
-                // Napok betöltése
                 days.clear();
                 days.addAll(planToEdit.getDays());
                 adapter.notifyDataSetChanged();
 
-                // Gomb szövegének módosítása
                 Button saveButton = findViewById(R.id.btn_save_plan);
                 saveButton.setText(R.string.update_plan);
 
-                // Hide loading indicator
                 if (loadingProgressBar != null) {
                     loadingProgressBar.setVisibility(View.GONE);
                 }
@@ -135,7 +123,6 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
                         "Error loading workout plan: " + e.getMessage(),
                         Toast.LENGTH_SHORT).show();
 
-                // Hide loading indicator
                 if (loadingProgressBar != null) {
                     loadingProgressBar.setVisibility(View.GONE);
                 }
@@ -143,7 +130,6 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
         });
     }
 
-    // Új metódus a nap szerkesztéséhez
     private void showEditDayDialog(int position, WorkoutDay day) {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_edit_day, null);
         EditText etDayName = dialogView.findViewById(R.id.et_day_name);
@@ -166,7 +152,7 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
     }
 
     private void addNewDay() {
-        // Új nap hozzáadása pár alap gyakorlattal
+
         String dayName = etDayName.getText().toString().trim();
         if (dayName.isEmpty()) {
             Toast.makeText(this, "No day name given", Toast.LENGTH_SHORT).show();
@@ -174,7 +160,6 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
         }
         etDayName.setText("");
         WorkoutDay newDay = new WorkoutDay(dayName);
-        //newDay.getExercises().add(new Exercise("New exercise", "3x10"));
         days.add(newDay);
         adapter.notifyItemInserted(days.size() - 1);
     }
@@ -191,19 +176,15 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
         }
 
         if (isEditMode) {
-            // MEGLÉVŐ TERV FRISSÍTÉSE
             Log.d(TAG, "Updating existing plan with ID: " + planIdToEdit);
 
-            // Create a new plan object with the edited data
             WorkoutPlan updatedPlan = new WorkoutPlan(userId, planName);
             updatedPlan.setPlanId(planIdToEdit);
             updatedPlan.setDays(days);
 
-            // Update in Firestore
             repository.updatePlan(updatedPlan);
             Toast.makeText(this, "Workoutplan updated", Toast.LENGTH_SHORT).show();
         } else {
-            // ÚJ TERV LÉTREHOZÁSA
             WorkoutPlan newPlan = new WorkoutPlan(userId, planName);
             newPlan.setDays(days);
             newPlan.setCreatedAt(new Date());
@@ -211,7 +192,7 @@ public class AddWorkoutPlanActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess() {
                     Toast.makeText(AddWorkoutPlanActivity.this, "Workoutplan saved", Toast.LENGTH_SHORT).show();
-                    finish();  // Terv mentése után visszatérés
+                    finish();
                 }
 
                 @Override

@@ -26,7 +26,6 @@ public class WeeklyResetReceiver extends BroadcastReceiver {
 
         Log.d(TAG, "Weekly reset triggered at: " + System.currentTimeMillis());
 
-        // WorkManager indítása
         OneTimeWorkRequest resetWork = new OneTimeWorkRequest.Builder(ResetProgressWorker.class)
                 .setInitialDelay(0, TimeUnit.SECONDS)
                 .build();

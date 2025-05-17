@@ -15,7 +15,6 @@ public class NotificationHelper {
     private static final String TAG = "NotificationHelper";
 
     public static void showWorkoutReminder(Context context) {
-        // Check permission
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
                 != PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "No notification permission");

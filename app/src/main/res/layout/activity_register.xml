@@ -11,10 +11,6 @@
     android:paddingBottom="24dp"
     tools:context=".RegisterActivity">
 
-    <!-- Logo -->
-
-    <!-- Cím -->
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -43,18 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         />
-
-    <!-- Felhasználónév mező -->
-
-    <!-- Email cím mező -->
-
-    <!-- Jelszó mező -->
-
-    <!-- Jelszó ismétlés mező -->
-
-    <!-- Regisztráció gomb -->
-
-    <!-- Bejelentkezés link -->
 
     <EditText
         android:id="@+id/userNameEditText"

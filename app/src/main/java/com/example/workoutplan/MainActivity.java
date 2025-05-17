@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements WorkoutPlanAdapte
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             Log.d(LOG_TAG, "Authenticated user!");
-            // Initialize with dummy user ID
+
             repository = new WorkoutRepository(user.getUid());
             setupRecyclerView();
             AlarmScheduler.scheduleAllAlarms(this);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements WorkoutPlanAdapte
 
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                        1); // 1 = requestCode
+                        1);
             }
         }
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements WorkoutPlanAdapte
     @Override
     protected void onStart() {
         super.onStart();
-        // Realtime frissítés figyelése
+
         repository.loadWorkoutPlans(new WorkoutRepository.OnPlansLoadedListener() {
             @Override
             public void onPlansLoaded(List<WorkoutPlan> plans) {
@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements WorkoutPlanAdapte
     protected void onResume() {
         super.onResume();
 
-        //adapter.updateData(repository.getAllPlans());
         repository.loadWorkoutPlans(new WorkoutRepository.OnPlansLoadedListener() {
             @Override
             public void onPlansLoaded(List<WorkoutPlan> plans) {
@@ -216,11 +215,10 @@ public class MainActivity extends AppCompatActivity implements WorkoutPlanAdapte
                 .setTitle("Delete Workout Plan")
                 .setMessage("Are you sure you want to delete '" + planToDelete.getName() + "' with all its days and exercises?")
                 .setPositiveButton("Delete", (dialog, which) -> {
-                    // Törlés megerősítése esetén
+
                     String planId = planToDelete.getPlanId();
                     repository.deletePlan(planId);
 
-                    // Adapter frissítése
                     repository.loadWorkoutPlans(new WorkoutRepository.OnPlansLoadedListener() {
                         @Override
                         public void onPlansLoaded(List<WorkoutPlan> plans) {
@@ -242,22 +240,19 @@ public class MainActivity extends AppCompatActivity implements WorkoutPlanAdapte
 
     @Override
     public void onProgressChanged(String planId, int progress) {
-        // 1. Frissítsd a repository-ban a napok állapotát
+
         WorkoutPlan plan = repository.getPlanById(planId);
         if (plan != null) {
             plan.setCurrentProgress(progress);
 
-            // 2. Mentés a repository-ba
             repository.updatePlan(plan);
 
-            // 3. Értesítsd az adaptert a változásról
             adapter.updateData(repository.getAllPlans());
         }
     }
 
     @Override
     public void onWorkoutCompleted(String planId) {
-        // Extra logika teljesítéskor
         Toast.makeText(this, repository.getPlanById(planId).getName() + " completed!", Toast.LENGTH_SHORT).show();
     }
 }
